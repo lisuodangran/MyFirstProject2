@@ -25,6 +25,179 @@ private double wst,bmi,bfr,wat,mus,bon,meta,sum;
 
 
 
+
+
+        Button button1=(Button)findViewById(R.id.button1);
+     button1.setOnClickListener(new View.OnClickListener() {
+     @Override
+         public void onClick(View v){
+         Intent intent=new Intent(Main2Activity.this,ReportActivity.class);
+         EditText editText=(EditText)findViewById(R.id.edit_text1);
+         i=Integer.parseInt(editText.getText().toString());
+         EditText editTextSex=(EditText)findViewById(R.id.edit_sex);
+         j=Integer.parseInt(editTextSex.getText().toString());
+         EditText editTextWeight=(EditText)findViewById(R.id.edit_text2);
+         w=Integer.parseInt(editTextWeight.getText().toString());
+         EditText editTextAge=(EditText)findViewById(R.id.edit_age);
+         a=Integer.parseInt(editTextAge.getText().toString());
+         bmi=w/(i*i*0.01*0.01);
+         bon=(w-a)*0.2;
+         if(bon<-4)
+         {
+             store_bon=50;
+         }else if((bon>=-4)&&(bon<=-1))
+         {
+             store_bon=70;
+         }
+         else if(bon>-1)
+         {
+             store_bon=100;
+         }
+         if(j==1)
+         {    wst=(i-80)*0.7;
+
+             bfr=1.2*bmi+0.23*a-5.4-10.8;
+
+             if((bfr>8)&&(bfr<=15))
+             {
+                 store_bfr=70;
+             }else if((bfr>15)&&(bfr<=25))
+             {
+                 store_bfr=100;
+             }
+             else if((bfr>25)&&(bfr<=35))
+             {
+                 store_bfr=70;
+             }
+
+             mus=100*78/(w*2);
+
+             if(mus<=60)
+             {
+                 store_mus=60;
+             }else if((mus>60)&&(mus<=65))
+             {
+                 store_mus=80;
+             }
+             else if(mus>65)
+             {
+                 store_mus=100;
+             }
+             wat=mus*1.2;
+             if(wat<70)
+             {
+                 store_wat=70;
+             }else if((wat>=70)&&(wat<=80))
+             {
+                 store_wat=100;
+             }else if(wat>80)
+             {
+                 store_wat=70;
+             }
+             meta=13.7*w+5*i-6.8*a+66;
+             if(meta<1300)
+             {
+                 store_meta=70;
+             }
+             else if((meta>=1300)&&(meta<=1900))
+             {
+                 store_meta=100;
+             }else if(meta>1900)
+             {
+                 store_meta=70;
+             }
+         }
+         else if(j==0){
+             wst=(i-70)*0.6;
+             bfr=1.2*bmi+0.23*a-5.4;
+             if((bfr>10)&&(bfr<=20))
+             {
+                 store_bfr=70;
+             }else if((bfr>20)&&(bfr<=30))
+             {
+                 store_bfr=100;
+             }
+             else if((bfr>30)&&(bfr<=45))
+             {
+                 store_bfr=70;
+             }
+             mus=100*56/(w*2);
+             if(mus<=55)
+             {
+                 store_mus=60;
+             }else if((mus>55)&&(mus<=60))
+             {
+                 store_mus=80;
+             }
+             else if(mus>60)
+             {
+                 store_mus=100;
+             }
+             wat=mus*1.3;
+             if(wat<70)
+             {
+                 store_wat=70;
+             }else if((wat>=70)&&(wat<=80))
+             {
+                 store_wat=100;
+             }else if(wat>80)
+             {
+                 store_wat=70;
+             }
+
+             meta=9.6*w+1.8*i-4.7*a+655;
+             if(meta<1100)
+             {
+                 store_meta=70;
+             }
+             else if((meta>=1100)&&(meta<=1500))
+             {
+                 store_meta=100;
+             }else if(meta>1500)
+             {
+                 store_meta=70;
+             }
+         }
+         if((bmi>=10)&&(bmi<=18.5))
+         {
+             store_bmi=75;
+         }else if((bmi>18.5)&&(bmi<=24))
+         {
+             store_bmi=100;
+         } else if ((bmi>24)&&(bmi<=28))
+         {
+             store_bmi=80;
+         }else if((bmi>28)&&(bmi<=35))
+         {
+             store_bmi=60;
+         }
+
+         sum=store_bmi*0.5+store_bfr*0.1+store_wat*0.1+store_mus*0.1+store_bon*0.1+store_meta*0.1;
+
+
+         if(sum<70)
+         {
+             String ReportSum="您的身体素质较差，建议您从饮食和运动两方面进行改善，吃高蛋白高维生素的食物，" +
+                     "忌辛辣刺激的食物，养成良好的进食习惯，晚上不要熬夜，保证睡眠，坚持早晚运动，希望对您有帮助";
+             intent.putExtra("R_Sum",ReportSum);
+         }else if((sum>=70)&&(sum<85))
+         {
+             String ReportSum="您的身体素质较好，建议您坚持锻炼，规律饮食，每天进行充足的休息、睡眠等";
+             intent.putExtra("R_Sum",ReportSum);
+         }else if((sum>=85)&&(sum<=100))
+         {
+             String ReportSum="您的身体素质优秀，请继续保持";
+             intent.putExtra("R_Sum",ReportSum);
+         }
+         startActivity(intent);
+     }
+     });
+
+
+
+
+
+
         Button button2=(Button)findViewById(R.id.button2);
     button2.setOnClickListener(new View.OnClickListener(){
        @Override
